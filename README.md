@@ -40,7 +40,8 @@ git config --global credential.helper osxkeychain
 -- set upstream to avoid the error "fatal: no upstream configured for branch 'master'"
 
 git push --set-upstream origin master
-git remote add upstream github.com/fmendes/LWCSpecialist
+
+git remote add upstream https://github.com/fmendes/LWCSpecialist
 
 ## Salesforce App
 
