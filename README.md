@@ -29,7 +29,17 @@ sfdx force:source:retrieve -n LWCPackage
       , "default": false
     }
 
+### 5
+
+-- configure git to use MacOs keychain
+
 git config --global credential.helper osxkeychain
+
+### 6
+
+-- set upstream to avoid the error "fatal: no upstream configured for branch 'master'"
+
+git push --set-upstream origin master
 
 ## Salesforce App
 
