@@ -1,0 +1,19 @@
+<template>
+    <template if:true={error}>
+        <p>{error}</p>
+    </template>
+    <lightning-layout horizontal-align="center">
+      <lightning-layout-item class="slds-align-middle" 
+                            padding="horizontal-medium">
+        <lightning-combobox 
+            name="type"
+            label="Type"
+            value={selectedBoatTypeId}
+            placeholder="Select Type"
+            options={searchOptions}
+            onchange={handleSearchOptionChange} 
+            class="slds-align-middle"></lightning-combobox>
+      </lightning-layout-item>
+    </lightning-layout>
+  </template>
+  
