@@ -6,19 +6,24 @@ https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lwc_spe
 
 ### 1
 https://salesforce.stackexchange.com/questions/244080/sfdx-forcemdapiretrieve-giving-unsupported-api-version-invalid-api-version-s
+
 -- make sfdx use the same API version as configured in the sfdx-project.json:
+
 sfdx force:config:set apiVersion=48.0
 
 ### 2
 -- message file has to be created with the name capitalized this way:
+
 BoatMessageChannel.messageChannel-meta.xml
 
 ### 3
 -- force retrieve the classes from the installed package because it doesn't retrieve them by default when the org is authorized
+
 sfdx force:source:retrieve -n LWCPackage
 
 ### 4
 -- add the piece below to the sfdx-project.json as another entry under "packageDirectories" to be able to submit changes to the classes in the package: 
+
     , {
       "path": "LWCPackage"
       , "default": false
