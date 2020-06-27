@@ -29,6 +29,7 @@ sfdx force:source:retrieve -n LWCPackage
       , "default": false
     }
 
+git config --global credential.helper osxkeychain
 
 ## Salesforce App
 
