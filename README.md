@@ -35,7 +35,7 @@ sfdx force:source:retrieve -n LWCPackage
 
 git config --global credential.helper osxkeychain
 
-### 6
+### 6 
 
 -- set upstream to avoid the error "fatal: no upstream configured for branch 'master'"
 
