@@ -4,40 +4,31 @@ https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lwc_spe
 
 ## Steps:
 
-### 1
-https://salesforce.stackexchange.com/questions/244080/sfdx-forcemdapiretrieve-giving-unsupported-api-version-invalid-api-version-s
-
--- make sfdx use the same API version as configured in the sfdx-project.json:
+### 1 make sfdx use the same API version as configured in the sfdx-project.json:
+https://salesforce.stackexchange.com/questions/244080/sfdx-forcemdapiretrieve-giving-unsupported-api-version-invalid-api-version-s 
 
 sfdx force:config:set apiVersion=48.0
 
-### 2
--- message file has to be created with the name capitalized this way:
+### 2 message file has to be created with the name capitalized this way:
 
 BoatMessageChannel.messageChannel-meta.xml
 
-### 3
--- force retrieve the classes from the installed package because it doesn't retrieve them by default when the org is authorized
+### 3 force retrieve the classes from the installed package because it doesn't retrieve them by default when the org is authorized
 
 sfdx force:source:retrieve -n LWCPackage
 
-### 4
--- add the piece below to the sfdx-project.json as another entry under "packageDirectories" to be able to submit changes to the classes in the package: 
+### 4 add the piece below to the sfdx-project.json as another entry under "packageDirectories" to be able to submit changes to the classes in the package: 
 
     , {
       "path": "LWCPackage"
       , "default": false
     }
 
-### 5
-
--- configure git to use MacOs keychain
+### 5 configure git to use MacOs keychain
 
 git config --global credential.helper osxkeychain
 
-### 6 
-
--- set upstream to avoid the error "fatal: no upstream configured for branch 'master'"
+### 6 set upstream to avoid the error "fatal: no upstream configured for branch 'master'" (not sure why VSCode can't better interact with git...)
 
 git push --set-upstream origin master
 
