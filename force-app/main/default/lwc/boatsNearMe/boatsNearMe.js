@@ -23,8 +23,10 @@ export default class BoatsNearMe extends LightningElement {
                             , longitude: '$longitude'
                             , boatTypeId:'$boatTypeId' } ) 
     wiredBoatsJSON( { error, data } ) {
+        console.log( 'data', data );
+        console.log( 'error', error );
         if( data ) {
-            createMapMarkers( data );
+            this.createMapMarkers( data );
         } else if ( error ) {
             this.isLoading = false;
             //this.isRendered = false;
@@ -40,9 +42,11 @@ export default class BoatsNearMe extends LightningElement {
   // Controls the isRendered property
   // Calls getLocationFromBrowser()
     renderedCallback() { 
-        if( this.isRendered == false ) {
-            this.getLocationFromBrowser();
+        console.log( 'isRendered', this.isRendered );
+        if( this.isRendered ) {
+            return;
         }
+        this.getLocationFromBrowser();
         this.isRendered = true;
     }
 
@@ -59,24 +63,25 @@ export default class BoatsNearMe extends LightningElement {
   }
   
   // Creates the map markers
-  createMapMarkers(boatData) { 
+  createMapMarkers( boatData ) { 
+        // getBoatsByLocation returns a serialized string!
+        let data = JSON.parse( boatData );
+        this.mapMarkers = data.map( boat => {
+            return { location: {
+                Latitude: boat.Geolocation__Latitude__s
+                , Longitude: boat.Geolocation__Longitude__s
+            }, 
+            title: boat.Name,
+            };
+        });
+        this.mapMarkers.unshift( { location: {
+                                        Latitude: this.latitude
+                                        , Longitude: this.longitude
+                                    }
+                                    , title: LABEL_YOU_ARE_HERE
+                                    , icon: ICON_STANDARD_USER } );
 
-    this.mapMarkers = data.map( boat => {
-        return { location: {
-            Latitude: boat.Geolocation__Latitude__s
-            , Longitude: boat.Geolocation__Longitude__s
-         }, 
-         title: boat.Name,
-        };
-    });
-    this.mapMarkers.unshift( { location: {
-                                    Latitude: this.latitude
-                                    , Longitude: this.longitude
-                                }
-                                , title: LABEL_YOU_ARE_HERE
-                                , icon: ICON_STANDARD_USER } );
-
-    this.isLoading = false;
-    //this.isRendered = true;
+        this.isLoading = false;
+        //this.isRendered = true;
   }
 }

@@ -28,7 +28,11 @@ export default class BoatSearchResults extends LightningElement {
         messageContext;
 
     @wire( getBoats, { boatTypeId: '$boatTypeId' } ) 
-        wiredBoats( { error, result } ) { 
+        wiredBoats( result ) { 
+            //console.log( 'error', error );
+            console.log( 'result', result );
+            this.boats = {};
+
             if( result ) {
                 this.notifyLoading( true );
                 this.boats = result;
@@ -37,9 +41,9 @@ export default class BoatSearchResults extends LightningElement {
                 let isLoading = this.boats.data ? false : true;
                 this.notifyLoading( isLoading );
 
-            } else if ( error ) {
+            } else {
                 this.notifyLoading( false );
-                this.boats = [];
+                this.boats.data = [];
             }
         }
     

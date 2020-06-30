@@ -10,7 +10,11 @@ export default class BoatTile extends LightningElement {
   
   // Getter for dynamically setting the background image for the picture
   get backgroundStyle() { 
-    return `background-image:url( $boat.Picture__c )`;
+    const pictureURL = this.boat.Picture__c;
+    if( pictureURL ) {
+      return `background-image:url( ${ pictureURL } )`;
+    }
+    return '';
   }
   
   // Getter for dynamically setting the tile class based on whether the
