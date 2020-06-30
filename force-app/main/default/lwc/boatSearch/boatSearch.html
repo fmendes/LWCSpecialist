@@ -28,7 +28,8 @@
         </template>
         
         <!-- boatSearchResults goes here -->
-        <c-boat-search-results onloading={handleLoading}
+        <c-boat-search-results boat-type-id={boatTypeId}
+                      onloading={handleLoading}
                       ondoneloading={handleDoneLoading} >
         </c-boat-search-results>
 
