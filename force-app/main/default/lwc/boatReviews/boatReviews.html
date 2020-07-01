@@ -25,6 +25,7 @@
                   <!-- display the creator’s picture -->
                         <lightning-avatar src={boatReview.CreatedBy.SmallPhotoUrl}
                                             variant="circle"
+                                            size="large"
                                             data-record-id={boatReview.CreatedBy.Id}
                                             onclick={navigateToRecord} >
                         </lightning-avatar>
@@ -33,13 +34,15 @@
                   <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
                     <p>
                         <!-- display creator’s name -->
-                        <a onclick={navigateToRecord} 
-                            data-record-id={boatReview.CreatedById} 
+                        <a id={boatReview.CreatedBy.Id}
+                            onclick={navigateToRecord} 
+                            data-record-id={boatReview.CreatedBy.Id} 
                             title={boatReview.CreatedBy.Name} >
                             {boatReview.CreatedBy.Name}
                         </a>
-                        <span><!-- display creator’s company name -->
-                            &nbsp;- {boatReview.CreatedBy.CompanyName}
+                        <span>
+                            <!-- display creator’s company name -->
+                            &nbsp;&mdash;&nbsp;{boatReview.CreatedBy.CompanyName}
                         </span>
                     </p>
                   </div>

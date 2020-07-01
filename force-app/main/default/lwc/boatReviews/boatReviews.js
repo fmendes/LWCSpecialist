@@ -62,15 +62,21 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
     
     // Helper method to use NavigationMixin to navigate to a given record on click
     navigateToRecord(event) { 
-        event.preventDefault();       // stop the form from submitting
-        const userId = event.target.getAttribute('data-record-id');
+        event.preventDefault();
+        event.stopPropagation();
+        const userId = event.target.getAttribute( 'data-record-id' );
         console.log( 'attempting navigation to ' + userId );
+
+        // NOTE:  standard way of reading data attributes
+        // is via the "dataset" object 
+        // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
+
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
-                recordId: userId,
+                recordId: event.target.dataset.recordId,
                 objectApiName: 'User',
-                actionName: 'view'
+                actionName: 'view',
             },
         });
     }

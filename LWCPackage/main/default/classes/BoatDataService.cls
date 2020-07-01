@@ -68,6 +68,7 @@ public with sharing class BoatDataService {
             SELECT
                 Id,
                 Name,
+                Boat__c,
                 Comment__c,
                 Rating__c,
                 LastModifiedDate,
