@@ -25,7 +25,7 @@ import BOAT_ID_FIELD from '@salesforce/schema/Boat__c.Id';
 import BOAT_NAME_FIELD from '@salesforce/schema/Boat__c.Name';
 const BOAT_FIELDS = [ BOAT_ID_FIELD, BOAT_NAME_FIELD ];
 
-export default class BoatDetailTabs extends LightningElement {
+export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
   boatId;
   wiredRecord;
   label = {
@@ -37,15 +37,9 @@ export default class BoatDetailTabs extends LightningElement {
   };
 
   @wire( getRecord, { recordId: '$boatId', fields: BOAT_FIELDS } )
-    getRecord( { error, data } ) {
-        // Error handling
-        if (data) {
-            this.wiredRecord = { data };
-            
-        } else if (error) {
-            this.boatId = undefined;
-        }
-  }
+    getRecord( data ) {
+            this.wiredRecord = data;
+    }
   
   // Decide when to show or hide the icon
   // returns 'utility:anchor' or null
@@ -87,28 +81,32 @@ export default class BoatDetailTabs extends LightningElement {
   
   // Navigates to record page
     navigateToRecordViewPage( event ) { 
+      console.log( 'event', event );
+      console.log( 'boatId', this.boatId );
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
                 recordId: this.boatId,
-                objectApiName: 'Boat__c',
-                actionName: 'view'
+                actionName: 'view',
             }
         });
     }
   
   // Navigates back to the review list, and refreshes reviews component
   handleReviewCreated() { 
+      console.log( 'handling review created' );
       //set the <lightning-tabset> Reviews tab to active using querySelector() 
       // and activeTabValue
       let theTabSet = this.template.querySelector( 'lightning-tabset' );
       if( theTabSet ) {
+        console.log( 'switching to review tab' );
         theTabSet.activeTabValue = 'Reviews';
       } 
 
       //and refresh the boatReviews component dynamically
       let boatReviews = this.template.querySelector('c-boat-reviews');
       if( boatReviews ) {
+        console.log( 'refreshing reviews' );
         boatReviews.refresh();
       }
   }

@@ -19,8 +19,10 @@
                                                 object-api-name="Boat__c"
                                                 density="compact" >
                         <div class="slds-box">
+                            <!--
                             <lightning-output-field field-name="BoatType__r.Name">
                             </lightning-output-field>
+                            -->
                             <lightning-output-field field-name="Length__c">
                             </lightning-output-field>
                             <lightning-output-field field-name="Price__c">
@@ -30,19 +32,25 @@
                         </div>
                     </lightning-record-view-form>
 
-                    <lightning-button 
-                        slot="actions"
-                        variant="base" 
-                        label={label.labelFullDetails}
-                        onclick={navigateToRecordViewPage} ></lightning-button>
+                    <div slot="actions">
+                        <lightning-button 
+                            slot="actions"
+                            label={label.labelFullDetails}
+                            onclick={navigateToRecordViewPage} >
+                        </lightning-button>
+                    </div>
                 </lightning-card>
             </lightning-tab>
 
-            <lightning-tab label={label.labelReviews} >
+            <lightning-tab label={label.labelReviews}
+                            value={label.labelReviews} >
                 <!-- boatReviews here -->
+                <c-boat-reviews record-id={boatId} >
+                </c-boat-reviews>
             </lightning-tab>
 
-            <lightning-tab label={label.labelAddReview} >
+            <lightning-tab label={label.labelAddReview}
+                            value={label.labelAddReview} >
                 <!-- boatAddReviewForm here -->
                 <!-- oncreatereview={handleReviewCreated} -->
                 <c-boat-add-review-form record-id={boatId} 

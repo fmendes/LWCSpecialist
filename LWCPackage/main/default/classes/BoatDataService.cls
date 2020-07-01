@@ -72,6 +72,8 @@ public with sharing class BoatDataService {
                 Rating__c,
                 LastModifiedDate,
                 CreatedDate,
+                CreatedById,
+                CreatedBy.Id,
                 CreatedBy.Name,
                 CreatedBy.SmallPhotoUrl,
                 CreatedBy.CompanyName
